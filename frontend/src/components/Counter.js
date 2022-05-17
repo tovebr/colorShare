@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementByAmount } from '../redux/counter';
 
@@ -17,4 +17,4 @@ function Counter() {
   );
 }
 
-export default Counter;
+export default Counter; */

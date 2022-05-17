@@ -16,10 +16,15 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database'));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.use(express.json());
 
 /* app.use('/subscribers', subscribersRouter); */
 app.use('/colors/users', userRoutes);
 app.use('/colors/posts', postRoutes);
 
-app.listen(3000, () => console.log('Server has started'));
+app.listen(5000, () => console.log('Server has started'));

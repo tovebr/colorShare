@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import store from './redux/store';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import { store } from './app/store';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './index.css';
 import App from './components/App';
