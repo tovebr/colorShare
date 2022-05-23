@@ -1,23 +1,33 @@
-import './App.css';
+import './App.scss';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsers } from '../features/users/usersSlice';
-import { getPosts } from '../features/posts/postsSlice';
+import { loadUser } from '../features/auth/authSlice';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Nav from './shared/Nav';
+import AllPosts from './pages/AllPosts';
+import UserPage from './pages/UserPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
-  const { posts } = useSelector((state) => state.posts);
+  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getUsers());
-    dispatch(getPosts());
+    dispatch(loadUser());
   }, [dispatch]);
 
   return (
-    <div className='App'>
-      <h1>Hej</h1>
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path='/' element={<AllPosts />} />
+        <Route path='/user/:id' element={<UserPage />} />
+        <Route path='/auth/register' element={<Register />} />
+        <Route path='/auth/login' element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 

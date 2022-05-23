@@ -1,0 +1,39 @@
+.navbar {
+  background: linear-gradient(to left, rgb(65, 27, 66), rgb(68, 31, 156));
+  height: 4rem;
+  &-items {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    > * {
+      margin: 0 1rem;
+    }
+  }
+
+  &-logo {
+    width: 3rem;
+    animation: logo 3s;
+  }
+  &-links > * {
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 0 1rem;
+  }
+  button {
+    color: purple;
+    padding: 0.4rem 0.7rem;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@keyframes logo {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

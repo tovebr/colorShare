@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
@@ -9,23 +10,6 @@ router.get('/', async (req, res) => {
     res.json(users);
   } catch (err) {
     res.status(400).json({ message: err.message });
-  }
-});
-
-// creating one
-router.post('/', async (req, res) => {
-  if (req.body.name && req.body.email && req.body.password) {
-    const user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    });
-    try {
-      const newUser = await user.save(user);
-      res.status(200).json({ message: newUser });
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
   }
 });
 
