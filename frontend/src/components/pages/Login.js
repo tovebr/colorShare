@@ -27,7 +27,10 @@ const Login = () => {
           type='text'
           placeholder='email'
           onChange={(e) =>
-            setFormValues({ ...formValues, email: e.target.value })
+            setFormValues({
+              ...formValues,
+              email: e.target.value.toLowerCase(),
+            })
           }
           value={formValues.email}
         />
@@ -35,7 +38,10 @@ const Login = () => {
           type='password'
           placeholder='password'
           onChange={(e) =>
-            setFormValues({ ...formValues, password: e.target.value })
+            setFormValues({
+              ...formValues,
+              password: e.target.value.toLowerCase(),
+            })
           }
           value={formValues.password}
         />

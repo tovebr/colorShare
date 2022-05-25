@@ -1,12 +1,15 @@
 const express = require('express');
+const { default: mongoose } = require('mongoose');
 const router = express.Router();
 const Post = require('../models/post');
+const User = require('../models/user');
 
 //getting all
 router.get('/', async (req, res) => {
   try {
     const posts = await Post.find();
-    res.json(posts);
+    /* res.json(posts); */
+    res.json({ posts: posts.map((post) => post.toObject({ getters: true })) });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -22,10 +25,29 @@ router.post('/', async (req, res) => {
   const post = new Post({
     description: req.body.description,
     color: req.body.color,
+    creator: req.body.userId,
   });
-  console.log(req.body.color);
+  console.log(post.creator);
+
+  let user;
+
+  try {
+    user = await User.findById(post.creator);
+    console.log(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  if (!user) {
+    return res
+      .status(404)
+      .json({ message: 'Could not find user for provided id' });
+  }
+
   try {
     const newPost = await post.save();
+    user.posts.push(post);
+    await user.save();
     res.json(newPost);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -46,10 +68,19 @@ router.patch('/:id', getPost, async (req, res) => {
 });
 
 // Deleting one
-router.delete('/:id', getPost, async (req, res) => {
+router.delete('/:id', async (req, res) => {
+  let post;
+  console.log('idelete');
   try {
-    await res.post.remove();
-    res.json({ message: 'Post deleted' });
+    post = await Post.findById(req.params.id).populate('creator');
+    if (post) {
+      await post.remove();
+      post.creator.posts.pull(post);
+      await post.creator.save();
+      res.json({ message: 'Post deleted' });
+    } else {
+      res.status(404).json({ message: 'Could not find place' });
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

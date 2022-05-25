@@ -6,8 +6,8 @@ const User = require('../models/user');
 //getting all users
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const users = await User.find({}, '-password');
+    res.json({ users: users.map((user) => user.toObject({ getters: true })) });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -26,6 +26,11 @@ router.patch('/:id', getUser, async (req, res) => {
 
   try {
     const updatedUser = await res.user.save();
+    /* res.json({
+      name: updatedUser.name,
+      email: updatedUser.email,
+      id: updatedUser._id,
+    }); */
     res.json(updatedUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -47,6 +52,7 @@ async function getUser(req, res, next) {
 
   try {
     user = await User.findById(req.params.id);
+    console.log(user);
     if (!user) {
       return res.status(404).json({ message: 'User cannot be found' });
     }

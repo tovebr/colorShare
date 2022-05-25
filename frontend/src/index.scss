@@ -13,6 +13,35 @@ a {
   text-decoration: none;
 }
 
+input,
+button,
+textarea {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+}
+button {
+  background-color: rgb(129, 2, 155);
+  max-width: 20rem;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 2rem auto 0 auto;
+  padding: 0.5rem 6rem;
+  box-shadow: 3px 3px 5px rgb(85, 85, 85);
+  transition: all 0.2s;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid rgb(129, 2, 155);
+}
+button:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -22,5 +51,4 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80vh;
 }

@@ -23,7 +23,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path='/' element={<AllPosts />} />
-        <Route path='/user/:id' element={<UserPage />} />
+        <Route path='/users/:id' element={<UserPage />} />
         <Route path='/auth/register' element={<Register />} />
         <Route path='/auth/login' element={<Login />} />
       </Routes>

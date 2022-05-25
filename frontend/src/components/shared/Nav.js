@@ -24,7 +24,7 @@ const Nav = () => {
         <div className='navbar-links'>
           {' '}
           <Link to='/'>All Posts</Link>
-          {auth.id && <Link to='/user/:id'>My page</Link>}
+          {auth.id && <Link to={`/users/${auth.id}`}>My page</Link>}
           {auth.id && (
             <button className='logout-button' onClick={logOutHandler}>
               Log out
