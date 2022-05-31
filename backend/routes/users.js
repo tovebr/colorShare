@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 // finding one
 router.get('/:id', getUser, async (req, res) => {
-  res.send(res.user);
+  res.send(res.user.toObject({ getters: true }));
 });
 
 // updating one

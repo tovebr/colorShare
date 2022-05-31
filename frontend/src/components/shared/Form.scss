@@ -18,9 +18,43 @@ form {
   }
 }
 
+.login-form {
+  position: relative;
+  .auth-error {
+    font-size: 0.8rem;
+    color: red;
+    position: absolute;
+    top: 9.5rem;
+    left: 6.5rem;
+  }
+  button {
+    margin-top: 3rem;
+  }
+}
+.button-div {
+  display: flex;
+}
+
+.register-form {
+  position: relative;
+  .email-error {
+    top: 8.2rem;
+    left: 3.5rem;
+  }
+  .name-error {
+    top: 4.2rem;
+    left: 3.5rem;
+  }
+  .password-error {
+    top: 12.2rem;
+    left: 3.5rem;
+  }
+}
+
 .postform {
   width: 700px;
   position: relative;
+
   .text-inputs {
     display: flex;
     align-items: center;
@@ -32,7 +66,33 @@ form {
     margin-top: 2rem;
   }
 
+  .description-error,
+  .color-error {
+    bottom: 5rem;
+    left: 3.5rem;
+  }
+  .color-error {
+    top: 4.5rem;
+  }
+
   &-info {
     font-size: 0.8rem;
+  }
+  &-edit {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .postform {
+    width: 80%;
+    button {
+      width: 40%;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+  .postform.postform-edit {
+    width: 90%;
   }
 }

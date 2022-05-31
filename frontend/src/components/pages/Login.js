@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../features/auth/authSlice';
@@ -10,11 +10,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
+  useEffect(() => {
+    if (auth.id) navigate('/');
+  }, [auth, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
       dispatch(loginUser(formValues));
-      navigate('/');
     } catch (err) {
       console.log(err.message);
     }
@@ -22,7 +25,7 @@ const Login = () => {
 
   return (
     <div className='flex-centered'>
-      <form onSubmit={handleSubmit}>
+      <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'
           placeholder='email'
@@ -34,6 +37,7 @@ const Login = () => {
           }
           value={formValues.email}
         />
+
         <input
           type='password'
           placeholder='password'
@@ -45,6 +49,10 @@ const Login = () => {
           }
           value={formValues.password}
         />
+
+        {auth.status === 'failed' && (
+          <p className='error-message auth-error'>{auth.error.message}</p>
+        )}
         <button>Login</button>
         <p className='switch-authmode'>
           Not yet a user? <Link to='/auth/register'>Register here</Link>

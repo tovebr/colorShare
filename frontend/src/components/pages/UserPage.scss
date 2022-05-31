@@ -1,0 +1,10 @@
+.user-card {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+@media screen and (max-width: 530px) {
+  .user-card {
+    margin: 1.5rem 0;
+  }
+}

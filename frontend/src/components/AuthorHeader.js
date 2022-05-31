@@ -18,9 +18,10 @@ const AuthorHeader = ({ user }) => {
   };
 
   return (
-    <Link to={`/users/${user.id}`} className='post-author'>
-      {casedName(user.name)}
-    </Link>
+    <div className='post-author'>
+      Author:
+      <Link to={`/users/${user.id}`}> {casedName(user.name)}</Link>
+    </div>
   );
 };
 

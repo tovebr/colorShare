@@ -1,23 +1,36 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { createPost } from '../../features/posts/postsSlice';
+import { getPosts, createPost } from '../../features/posts/postsSlice';
+import { getUsers } from '../../features/users/usersSlice';
 import PostForm from '../shared/PostForm';
 import PostList from '../PostList';
 
 const AllPosts = () => {
   const auth = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+    dispatch(getPosts());
+  }, [dispatch]);
+
   return (
     <div className='page-container'>
       {auth.id && (
-        <PostForm
-          className='postform'
-          buttontext='Post'
-          onSubmit={createPost}
-        />
+        <div className='flex-centered'>
+          <PostForm
+            mode='create'
+            className='postform'
+            buttontext='Post'
+            onSubmit={createPost}
+            post={{ description: '', color: '', isValid: false }}
+          />
+        </div>
       )}
 
-      <PostList />
+      <PostList selection='allUsers' />
     </div>
   );
 };

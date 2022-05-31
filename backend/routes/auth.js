@@ -10,7 +10,9 @@ router.post('/register', async (req, res) => {
   const existingUser = await User.findOne({ email: req.body.email });
 
   if (existingUser) {
-    return res.status(500).json({ message: 'User already exist' });
+    return res
+      .status(500)
+      .json({ message: 'Email is already registered, login instead' });
   }
 
   if (req.body.name && req.body.email && req.body.password) {
@@ -52,7 +54,7 @@ router.post('/login', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return res.status(400).json({ message: 'User does not exist' });
+    return res.status(400).json({ message: 'No user matches this email' });
   }
 
   const schema = Joi.object({

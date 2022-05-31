@@ -18,12 +18,12 @@ const Nav = () => {
   return (
     <nav className='navbar'>
       <div className='navbar-items page-container'>
-        <Link to='/'>
+        <Link className='navbar-logo-link' to='/'>
           <img className='navbar-logo' src={Logo} alt='logo' />
         </Link>
         <div className='navbar-links'>
           {' '}
-          <Link to='/'>All Posts</Link>
+          <Link to='/'>Home</Link>
           {auth.id && <Link to={`/users/${auth.id}`}>My page</Link>}
           {auth.id && (
             <button className='logout-button' onClick={logOutHandler}>

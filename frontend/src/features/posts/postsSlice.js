@@ -16,11 +16,14 @@ export const createPost = createAsyncThunk(
   }
 );
 export const updatePost = createAsyncThunk('posts/updatePost', async (post) => {
-  const { data } = await axios.patch(`${url}/posts/${post.id}`);
+  const { data } = await axios.patch(`${url}/posts/${post.id}`, {
+    description: post.description,
+    color: post.color,
+  });
   return data;
 });
-export const deletePost = createAsyncThunk('posts/deletePost', async () => {
-  const { data } = await axios.delete(`${url}/posts`);
+export const deletePost = createAsyncThunk('posts/deletePost', async (id) => {
+  const { data } = await axios.delete(`${url}/posts/${id}`);
   return data;
 });
 
@@ -49,6 +52,27 @@ const postsSlice = createSlice({
       state.posts.push(action.payload);
     },
     [createPost.rejected]: (state, action) => {
+      state.status = 'failed';
+    },
+    [updatePost.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [updatePost.fulfilled]: (state, action) => {
+      state.status = 'success';
+      const posts = state.posts.filter((post) => post.id !== action.payload.id);
+      state.posts = [...posts, action.payload];
+    },
+    [updatePost.rejected]: (state, action) => {
+      state.status = 'failed';
+    },
+    [deletePost.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.status = 'success';
+      state.posts = state.posts.filter((post) => post.id !== action.payload.id);
+    },
+    [deletePost.rejected]: (state, action) => {
       state.status = 'failed';
     },
   },

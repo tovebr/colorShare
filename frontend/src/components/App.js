@@ -12,7 +12,6 @@ import Register from './pages/Register';
 
 function App() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(loadUser());

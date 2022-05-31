@@ -61,7 +61,9 @@ router.patch('/:id', getPost, async (req, res) => {
 
   try {
     const updatedPost = await res.post.save();
-    res.json(updatedPost);
+    /* {post: updatedPost.toObject({ getters: true })} */
+
+    res.json(updatedPost.toObject({ getters: true }));
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -70,14 +72,13 @@ router.patch('/:id', getPost, async (req, res) => {
 // Deleting one
 router.delete('/:id', async (req, res) => {
   let post;
-  console.log('idelete');
   try {
     post = await Post.findById(req.params.id).populate('creator');
     if (post) {
       await post.remove();
       post.creator.posts.pull(post);
       await post.creator.save();
-      res.json({ message: 'Post deleted' });
+      res.status(200).json({ message: 'Post deleted', id: req.params.id });
     } else {
       res.status(404).json({ message: 'Could not find place' });
     }

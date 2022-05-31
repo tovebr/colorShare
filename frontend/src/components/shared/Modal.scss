@@ -1,0 +1,30 @@
+.modal {
+  background-color: #fff;
+  position: fixed;
+  z-index: 10;
+  top: 20%;
+  left: 50%;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  .delete-form {
+    width: 600px;
+    padding: 2rem;
+    h3 {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .modal {
+    width: 80%;
+    .delete-form {
+      width: 100%;
+    }
+    button {
+      width: 40%;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+}

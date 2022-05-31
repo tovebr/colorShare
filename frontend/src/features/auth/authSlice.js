@@ -44,7 +44,6 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem('jwt', data.jwt);
       return data;
     } catch (err) {
-      console.log(err.response.data);
       return rejectWithValue(err.response.data);
     }
   }
@@ -64,6 +63,7 @@ const authSlice = createSlice({
           name: user.name,
           email: user.email,
           id: user.id,
+          status: 'success',
         };
       }
     },
@@ -101,7 +101,7 @@ const authSlice = createSlice({
       }
     });
     builder.addCase(loginUser.rejected, (state, action) => {
-      return { ...state, status: 'failed' };
+      return { ...state, status: 'failed', error: action.payload };
     });
     builder.addCase(registerUser.pending, (state, action) => {
       return {
