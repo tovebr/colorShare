@@ -12,10 +12,10 @@ const PostForm = (props) => {
     color: '',
     isValid: false,
   });
-  const [isValid, setIsValid] = useState(false);
   const [colorError, setColorError] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
 
+  console.log(props.url);
   useEffect(() => {
     if (props.mode === 'edit') {
       setFormValues({
@@ -24,7 +24,6 @@ const PostForm = (props) => {
         color: props.post.color,
         isvalid: props.post.isValid,
       });
-      setIsValid(props.post.isValid);
     }
   }, []);
 
@@ -59,87 +58,44 @@ const PostForm = (props) => {
 
   const handleInput = (e) => {
     setFormValues({ ...formValues, [e.target.id]: e.target.value });
-    /* validateUserInput(); */
-    /* console.log(colorError, descriptionError);
-    console.log(formValues); */
-    /*  if (
-      !String(formValues.color)
-        .toLowerCase()
-        .match(/^#([0-9a-f]{3}){1,2}$/i)
-    ) {
-      setColorError('You must enter a valid colorcode');
-    } else {
-      setColorError('');
-    }
-
-    if (formValues.description.length < 3) {
-      setDescriptionError('You must enter a description, min 3 characters');
-    } else {
-      setDescriptionError('');
-    } */
   };
 
-  // false
-  /* console.log(
-    !String('#ffd449')
-      .toLowerCase()
-      .match(/^#([0-9a-f]{3}){1,2}$/i)
-  ); */
-
-  // true
-  /* console.log(
-    !String('#ff')
-      .toLowerCase()
-      .match(/^#([0-9a-f]{3}){1,2}$/i)
-  ); */
-  // true
-  /* console.log(
-    !String('')
-      .toLowerCase()
-      .match(/^#([0-9a-f]{3}){1,2}$/i)
-  ); */
-
-  const validateUserInput = () => {
-    if (
-      !String(formValues.color)
-        .toLowerCase()
-        .match(/^#([0-9a-f]{3}){1,2}$/i)
-    ) {
-      setColorError('You must enter a valid colorcode');
-      console.log('color bad');
-    } else {
-      console.log('color good');
-      setColorError('');
-    }
-
-    if (formValues.description.length < 3) {
-      console.log('desc bad');
-      setDescriptionError('You must enter a description, min 3 characters');
-    } else {
-      console.log('desc good');
-      setDescriptionError('');
-    }
-
-    if (colorError || descriptionError) {
-      setFormValues({ ...formValues, isValid: false });
-      setIsValid(false);
-      /* console.log(formValues.isValid, colorError, descriptionError);
-      console.log(isValid); */
-    } else {
-      setFormValues({ ...formValues, isValid: true });
-      setIsValid(true);
-      /* console.log(colorError, descriptionError);
-      console.log(isValid); */
+  const validateUserInput = (id) => {
+    if (id === 'color') {
+      if (
+        !String(formValues.color)
+          .toLowerCase()
+          .match(/^#([0-9a-f]{3}){1,2}$/i)
+      ) {
+        setColorError('You must enter a valid colorcode');
+        console.log('color bad');
+      } else {
+        console.log('color good');
+        setColorError('');
+      }
+    } else if (id === 'description') {
+      if (!formValues.description) {
+        console.log('desc bad');
+        setDescriptionError('You must enter a description');
+        console.log(descriptionError);
+      } else {
+        console.log('desc good');
+        setDescriptionError('');
+      }
     }
   };
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
+    validateUserInput('color');
+    validateUserInput('description');
 
-    validateUserInput();
-    console.log(isValid, formValues.isValid);
-
-    if (formValues.isValid) {
+    if (
+      !colorError &&
+      !descriptionError &&
+      formValues.color &&
+      formValues.description
+    ) {
       if (props.mode === 'create') {
         console.log(formValues, 'handlesubmitclick');
         handleNewPost();
@@ -167,6 +123,7 @@ const PostForm = (props) => {
           placeholder='color'
           value={formValues.color}
           onChange={(e) => handleInput(e)}
+          onBlur={(e) => validateUserInput(e.target.id)}
         />
         {colorError && (
           <p className='error-message color-error'>{colorError}</p>
@@ -184,6 +141,7 @@ const PostForm = (props) => {
         placeholder='description'
         value={formValues.description}
         onChange={(e) => handleInput(e)}
+        onBlur={(e) => validateUserInput(e.target.id)}
       />
       {descriptionError && (
         <p className='error-message description-error'>{descriptionError}</p>

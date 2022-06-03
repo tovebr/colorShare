@@ -19,7 +19,9 @@ const AllPosts = () => {
   const auth = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
-  const url = window.location.pathname;
+  /* const url = window.location.pathname; */
+  const [url, setUrl] = useState(window.location.pathname);
+  const [activeButton, setActiveButton] = useState('');
 
   /**
    * This useEffect will run when the component has mounted
@@ -39,16 +41,21 @@ const AllPosts = () => {
     // if reset-button is clicked there is no searchTerm and allPosts will be fetched
     if (!searchTerm) {
       dispatch(getPosts());
+      resetUrl();
+      setUrl('/');
     } else {
       //if there is a serachterm action to search database is dispatched
       dispatch(searchPosts(searchTerm));
       // and url is altered accordingly
       navigate(`/posts/search?query=${searchTerm}`);
+      setActiveButton(searchTerm);
+      setUrl(window.location.pathname);
     }
   };
 
-  const setUrl = () => {
+  const resetUrl = () => {
     navigate('/');
+    dispatch(getPosts());
   };
 
   return (
@@ -72,14 +79,18 @@ const AllPosts = () => {
             className='postform'
             buttontext='Post'
             onSubmit={createPost}
-            setUrl={setUrl}
+            setUrl={resetUrl}
             url={url}
           />
         </div>
       )}
       <div className='flex-centered'>
         <div className='posts-holder'>
-          <FilterOptions handleClick={handleSearchClick} />
+          <FilterOptions
+            activeButton={activeButton}
+            handleClick={handleSearchClick}
+            url={url}
+          />
           <PostList selection='allUsers' />
         </div>
       </div>

@@ -15,9 +15,7 @@ const colorOptions = [
   'orange',
 ];
 
-const FilterOptions = ({ handleClick }) => {
-  const [activeButton, setActiveButton] = useState('');
-
+const FilterOptions = ({ handleClick, url, activeButton }) => {
   // render all buttons the user can click to search database
   const renderedOptions = colorOptions.map((color) => {
     return (
@@ -26,24 +24,13 @@ const FilterOptions = ({ handleClick }) => {
         value={color}
         key={color}
         id={color}
-        className={activeButton === color ? 'active' : ''}
-        onClick={(e) => onClickedColorButton(e.target.value)}
+        className={activeButton === color && url !== '/' ? 'active' : ''}
+        onClick={(e) => handleClick(e.target.value)}
       >
         {color}
       </button>
     );
   });
-
-  /**
-   * When a color-search-button is clicked its handled here
-   * @param  {String} value the color the user wants to search for
-   */
-  const onClickedColorButton = (value) => {
-    // color is sent to function passed down from parent
-    handleClick(value);
-    // and clicked button gets an 'active'-class
-    setActiveButton(value);
-  };
 
   return (
     <div className='flex-centered'>
@@ -51,11 +38,7 @@ const FilterOptions = ({ handleClick }) => {
         <p>Filter posts by color</p>
         <div className='color-buttons'>
           {renderedOptions}{' '}
-          <button
-            type='button'
-            id='reset'
-            onClick={() => onClickedColorButton('')}
-          >
+          <button type='button' id='reset' onClick={() => handleClick('')}>
             Reset
           </button>
         </div>

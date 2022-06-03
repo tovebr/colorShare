@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+/**
+ * Create schema for users and determine what attributes are required
+ */
+
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -17,6 +21,7 @@ const userSchema = mongoose.Schema({
     {
       type: mongoose.Types.ObjectId,
       required: true,
+      // creating link to postSchema
       ref: 'Post',
     },
   ],

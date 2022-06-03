@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-
+/**
+ * Create schema for post and determine what attributes are required
+ */
 const postSchema = new mongoose.Schema({
   color: {
     type: String,

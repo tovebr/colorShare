@@ -6,7 +6,7 @@ import Modal from './shared/Modal';
 import './PostItem.scss';
 import { updatePost } from '../features/posts/postsSlice';
 
-const PostItem = ({ post, auth, user }) => {
+const PostItem = ({ post, auth, user, url }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState('');
 
@@ -35,6 +35,10 @@ const PostItem = ({ post, auth, user }) => {
     return description.slice(0, 1).toUpperCase() + description.slice(1);
   };
 
+  /* const handleUpdatePostClick = () => {
+    updatePost()
+  } */
+
   return (
     <React.Fragment>
       <Modal
@@ -44,6 +48,7 @@ const PostItem = ({ post, auth, user }) => {
         auth={auth}
         onCancel={closeModalHandler}
         onSubmit={updatePost}
+        url={url}
       />
       <div className='post'>
         <div className='post-content'>
