@@ -1,0 +1,81 @@
+[{
+  "_id": {
+    "$oid": "6297559053a8340cd2b6530d"
+  },
+  "color": "#15616d",
+  "description": "pertol, blue-green-ish, hard to describe! but i like it",
+  "creator": {
+    "$oid": "6297556553a8340cd2b65305"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629755f253a8340cd2b65323"
+  },
+  "color": "#ef233c",
+  "description": "raspberry-red, warm but with an pink edge",
+  "creator": {
+    "$oid": "629755c453a8340cd2b6531b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6297563653a8340cd2b65333"
+  },
+  "color": "#2ec4b6",
+  "description": "in the neighbourhood or turquoise, the beloved baby of blue and green!",
+  "creator": {
+    "$oid": "6297556553a8340cd2b65305"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6297567553a8340cd2b6533e"
+  },
+  "color": "#7678ed",
+  "description": "blue with a hint of purple, it borders on lavender",
+  "creator": {
+    "$oid": "629755c453a8340cd2b6531b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "629756ab53a8340cd2b6534b"
+  },
+  "color": "#ffff3f",
+  "description": "light and happy yellow",
+  "creator": {
+    "$oid": "629755c453a8340cd2b6531b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6297572453a8340cd2b6535e"
+  },
+  "color": "#db7f8e",
+  "description": "old-timey pink, not to light!",
+  "creator": {
+    "$oid": "6297550453a8340cd2b652f3"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6297587553a8340cd2b65380"
+  },
+  "color": "#ffd449",
+  "description": "yellow like the sun",
+  "creator": {
+    "$oid": "629757ed53a8340cd2b6537a"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6299ee12443a44dd3e81f407"
+  },
+  "color": "#80ed95",
+  "description": "in the neighbourhood or turquoise, the beloved baby of blue and green! ",
+  "creator": {
+    "$oid": "6297550453a8340cd2b652f3"
+  },
+  "__v": 0
+}]

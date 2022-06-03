@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "6297550453a8340cd2b652f3"
+  },
+  "name": "Vera",
+  "email": "v@gmail.com",
+  "password": "$2b$10$AziZspGsgT0gnzU6oeaMh.NPhstou6WCUXCWz/WzSZPz5KFYC/5Ue",
+  "posts": [
+    {
+      "$oid": "6297572453a8340cd2b6535e"
+    },
+    {
+      "$oid": "6299ee12443a44dd3e81f407"
+    }
+  ],
+  "__v": 156
+},{
+  "_id": {
+    "$oid": "6297556553a8340cd2b65305"
+  },
+  "name": "Mora",
+  "email": "m@gmail.com",
+  "password": "$2b$10$AnGXVfcn4wSWgRhnDhO3QudLVjqlBNU6ST1vPNdqV4jsJ4DVz8U6K",
+  "posts": [
+    {
+      "$oid": "6297559053a8340cd2b6530d"
+    },
+    {
+      "$oid": "6297563653a8340cd2b65333"
+    }
+  ],
+  "__v": 24
+},{
+  "_id": {
+    "$oid": "629755c453a8340cd2b6531b"
+  },
+  "name": "Charles",
+  "email": "c@gmail.com",
+  "password": "$2b$10$VRFvRLlUHvgkd8YWZdAqOenWq.6JjGCqsBVfAlcRoKgygogwEKAgm",
+  "posts": [
+    {
+      "$oid": "629755f253a8340cd2b65323"
+    },
+    {
+      "$oid": "6297567553a8340cd2b6533e"
+    },
+    {
+      "$oid": "629756ab53a8340cd2b6534b"
+    }
+  ],
+  "__v": 3
+},{
+  "_id": {
+    "$oid": "629757ed53a8340cd2b6537a"
+  },
+  "name": "anna",
+  "email": "elmbrandt@gmail.com",
+  "password": "$2b$10$8GNbnmN9Lg0eqd.Z553uAu63056nKR.mXWENADo.XkC8bCJYOX/a2",
+  "posts": [
+    {
+      "$oid": "6297587553a8340cd2b65380"
+    }
+  ],
+  "__v": 1
+}]
