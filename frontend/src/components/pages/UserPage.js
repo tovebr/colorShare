@@ -6,7 +6,7 @@ import { getUser, getUsers } from '../../features/users/usersSlice';
 import PostList from '../PostList';
 import './UserPage.scss';
 
-const UserPage = () => {
+const UserPage = ({ selection }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.users.user.user);

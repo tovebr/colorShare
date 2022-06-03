@@ -3,19 +3,28 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { url } from '../api';
 
+/**
+ * REDUX TOOLKIT
+ * posts slice
+ * handles all api-requests regarding posts, getting, updating creating and deleteing
+ * and saves to store
+ * the slices in this project has different syntaxes
+ * as i wanted to learn different ways to write it
+ */
+
+// action that gets all posts (made with createAsyncThunk that makes async requests possible with redux)
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
   const { data } = await axios.get(`${url}/posts`);
   return data.posts;
 });
 
+// action that will search database for posts with text-values provided by user
 export const searchPosts = createAsyncThunk(
   'posts/searchPosts',
   async (searchTerm, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${url}/posts/search?query=${searchTerm}` /* , {
-        query: searchTerm,
-      } */
+        `${url}/posts/search?query=${searchTerm}`
       );
       return data.posts;
     } catch (err) {
@@ -23,14 +32,18 @@ export const searchPosts = createAsyncThunk(
     }
   }
 );
+// action that creates a new post
 export const createPost = createAsyncThunk(
   'posts/createPost',
   async (formValues) => {
+    console.log('create');
     const { data } = await axios.post(`${url}/posts`, formValues);
 
     return data;
   }
 );
+
+// action that updates post
 export const updatePost = createAsyncThunk('posts/updatePost', async (post) => {
   const { data } = await axios.patch(`${url}/posts/${post.id}`, {
     description: post.description,
@@ -38,6 +51,8 @@ export const updatePost = createAsyncThunk('posts/updatePost', async (post) => {
   });
   return data;
 });
+
+// action that deletes post
 export const deletePost = createAsyncThunk('posts/deletePost', async (id) => {
   const { data } = await axios.delete(`${url}/posts/${id}`);
   return data;
@@ -50,6 +65,8 @@ const postsSlice = createSlice({
     status: null,
   },
   extraReducers: {
+    // extraReducers are reducers that handle async functions
+    // they set status and stores returned data
     [getPosts.pending]: (state, action) => {
       state.status = 'loading';
     },

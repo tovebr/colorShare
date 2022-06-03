@@ -4,6 +4,14 @@ import jwtDecode from 'jwt-decode';
 
 import { url } from '../api';
 
+/**
+ * REDUX TOOLKIT
+ * authentication slice
+ * handles all api-requests regarding authentification
+ * the slices in this project has different syntaxes
+ * as i wanted to learn different ways to write it
+ */
+
 const initialState = {
   jwt: localStorage.getItem('jwt'),
   name: '',
@@ -13,16 +21,18 @@ const initialState = {
   status: null,
 };
 
+// action that registers user (made with createAsyncThunk that makes async requests possible with redux)
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (values, { rejectWithValue }) => {
     try {
+      // makes api-request with arguments passed in
       const { data } = await axios.post(`${url}/auth/register`, {
         name: values.name,
         email: values.email,
         password: values.password,
       });
-
+      // stores returned jwt in localstorage
       localStorage.setItem('jwt', data.jwt);
       return data;
     } catch (err) {
@@ -32,6 +42,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+// action that logs in user
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (values, { rejectWithValue }) => {
@@ -80,10 +91,14 @@ const authSlice = createSlice({
       };
     },
   },
+  // extraReducers are reducers that handle async functions
+  // they set status and stores returned data
   extraReducers: (builder) => {
+    // if request is pending
     builder.addCase(loginUser.pending, (state, action) => {
       return { ...state, status: 'pending' };
     });
+    // if request was successfull
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = jwtDecode(action.payload.jwt);
@@ -100,6 +115,7 @@ const authSlice = createSlice({
         return state;
       }
     });
+    // if request was rejected
     builder.addCase(loginUser.rejected, (state, action) => {
       return { ...state, status: 'failed', error: action.payload };
     });

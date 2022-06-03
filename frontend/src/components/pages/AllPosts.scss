@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 .posts-holder {
-  background-color: rgba(253, 252, 252, 0.527);
-  width: 700px;
+  background-color: rgba(253, 252, 252, 0.767);
+  width: 80%;
   padding: 2rem;
   border-radius: 5px;
+  margin: 2rem;
 }
 
 .welcome {
-  width: 700px;
+  width: 80%;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 2rem;
@@ -26,5 +27,29 @@
   }
   &-text {
     font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .welcome {
+    width: 80%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    &-heading {
+      font-size: 3rem;
+    }
+    &-text {
+      font-size: 1.2rem;
+    }
+  }
+  .posts-holder {
+    width: 80%;
+    &-info {
+      width: 70%;
+      margin-right: 1rem;
+    }
+    &-colorsample {
+      width: 30%;
+    }
   }
 }

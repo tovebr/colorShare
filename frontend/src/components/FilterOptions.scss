@@ -26,3 +26,23 @@
     }
   }
 }
+
+@media screen and (max-width: 700px) {
+  .filter-options {
+    width: 80%;
+    padding: 0;
+    p {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .color-buttons {
+      padding: 0;
+      width: 100%;
+      button {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.9rem;
+        margin: 0.25rem;
+      }
+    }
+  }
+}

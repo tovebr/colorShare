@@ -6,7 +6,7 @@ import Modal from './shared/Modal';
 import './PostItem.scss';
 import { updatePost } from '../features/posts/postsSlice';
 
-const PostItem = ({ post, auth, user, url }) => {
+const PostItem = ({ selection, post, auth, user, url }) => {
   const [showModal, setShowModal] = useState(false);
   const [modalMode, setModalMode] = useState('');
 
@@ -35,10 +35,6 @@ const PostItem = ({ post, auth, user, url }) => {
     return description.slice(0, 1).toUpperCase() + description.slice(1);
   };
 
-  /* const handleUpdatePostClick = () => {
-    updatePost()
-  } */
-
   return (
     <React.Fragment>
       <Modal
@@ -65,12 +61,14 @@ const PostItem = ({ post, auth, user, url }) => {
             style={{ backgroundColor: post.color }}
           ></div>
         </div>
-        {auth.status === 'success' && auth.id === user.id && (
-          <div className='post-buttons'>
-            <button onClick={() => openModalHandler('edit')}>Edit</button>
-            <button onClick={() => openModalHandler('delete')}>Delete</button>
-          </div>
-        )}
+        {auth.status === 'success' &&
+          auth.id === user.id &&
+          selection === 'oneUser' && (
+            <div className='post-buttons'>
+              <button onClick={() => openModalHandler('edit')}>Edit</button>
+              <button onClick={() => openModalHandler('delete')}>Delete</button>
+            </div>
+          )}
         {auth.status === null && null}
       </div>
     </React.Fragment>

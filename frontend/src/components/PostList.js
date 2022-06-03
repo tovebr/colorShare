@@ -34,7 +34,15 @@ const PostList = ({ selection, user }) => {
               ? users.find((user) => user.id === post.creator)
               : null;
           // get jsx for all posts
-          return <PostItem key={post.id} post={post} user={user} auth={auth} />;
+          return (
+            <PostItem
+              selection={selection}
+              key={post.id}
+              post={post}
+              user={user}
+              auth={auth}
+            />
+          );
         })
         .reverse();
     } else if (
@@ -46,9 +54,7 @@ const PostList = ({ selection, user }) => {
       // if there are no posts yet
       return (
         <div className='post'>
-          <div className='post-content'>
-            No posts yet! Log in or sign up to write the first one!
-          </div>
+          <div className='post-content'>No posts yet!</div>
         </div>
       );
     } else if (
@@ -57,14 +63,24 @@ const PostList = ({ selection, user }) => {
       user.posts.length > 0
     ) {
       // if only one users posts should be displayed find only that users posts
-      return posts.map((post) => {
-        if (post.creator === user.id) {
-          // and return jsx for each post
-          return <PostItem key={post.id} post={post} user={user} auth={auth} />;
-        } else {
-          return null;
-        }
-      });
+      return posts
+        .map((post) => {
+          if (post.creator === user.id) {
+            // and return jsx for each post
+            return (
+              <PostItem
+                selection={selection}
+                key={post.id}
+                post={post}
+                user={user}
+                auth={auth}
+              />
+            );
+          } else {
+            return null;
+          }
+        })
+        .reverse();
     } else if (
       selection === 'oneUser' &&
       postStatus === 'success' &&

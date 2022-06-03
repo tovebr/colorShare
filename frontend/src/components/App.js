@@ -9,11 +9,12 @@ import AllPosts from './pages/AllPosts';
 import UserPage from './pages/UserPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import NewPost from './pages/NewPost';
 
 function App() {
   const dispatch = useDispatch();
 
-  // loads user (if there is a jwt saved in localstorage)
+  // when component is mounted: loads user (if there is a jwt saved in localstorage)
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={<AllPosts />} />
         <Route path='/posts/search' element={<AllPosts />} />
+        <Route path='/newpost' element={<NewPost />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='/auth/register' element={<Register />} />
         <Route path='/auth/login' element={<Login />} />

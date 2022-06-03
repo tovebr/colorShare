@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getPosts } from '../../features/posts/postsSlice';
 
 const PostForm = (props) => {
@@ -14,8 +14,9 @@ const PostForm = (props) => {
   });
   const [colorError, setColorError] = useState('');
   const [descriptionError, setDescriptionError] = useState('');
+  const navigate = useNavigate();
 
-  console.log(props.url);
+  //if component is mounted with already existing post to edit that post will be set to state
   useEffect(() => {
     if (props.mode === 'edit') {
       setFormValues({
@@ -27,6 +28,7 @@ const PostForm = (props) => {
     }
   }, []);
 
+  // if form is createing new post: create post-action will be dispatched with userinputs
   const handleNewPost = () => {
     dispatch(
       props.onSubmit({
@@ -35,6 +37,8 @@ const PostForm = (props) => {
         userId: auth.id,
       })
     );
+
+    // clear inputfields if creation is successfull
     if (postStatus === 'success') {
       setFormValues({
         ...formValues,
@@ -45,6 +49,7 @@ const PostForm = (props) => {
     }
   };
 
+  // if form is updating previous post: update post-action will be dispatched with userinputs
   const handleUpdatePost = async () => {
     await dispatch(
       props.onSubmit({
@@ -53,49 +58,60 @@ const PostForm = (props) => {
         color: formValues.color.toLowerCase(),
       })
     );
-    dispatch(getPosts());
+    // go back to users own page
+    navigate(-1);
   };
 
+  // set formValues on change on inputs
   const handleInput = (e) => {
     setFormValues({ ...formValues, [e.target.id]: e.target.value });
   };
 
+  /**
+   * function validates userinput so that action wont be dispatched with bad data
+   * @param  {string} id the id of the input that should be validated
+   */
   const validateUserInput = (id) => {
     if (id === 'color') {
+      // regex to determine if provided colorcode is indeed a valid colorcode
       if (
         !String(formValues.color)
           .toLowerCase()
           .match(/^#([0-9a-f]{3}){1,2}$/i)
       ) {
+        // if provided colorcode is not valid an error will be set
         setColorError('You must enter a valid colorcode');
-        console.log('color bad');
       } else {
-        console.log('color good');
         setColorError('');
       }
     } else if (id === 'description') {
+      // checking that user has entered a description
       if (!formValues.description) {
-        console.log('desc bad');
         setDescriptionError('You must enter a description');
-        console.log(descriptionError);
       } else {
-        console.log('desc good');
         setDescriptionError('');
       }
     }
   };
 
+  /**
+   * function that makes a final validation of userinput before dispaching action
+   * @param  {object} e the eventobject where event occured
+   */
   const handleSubmitClick = (e) => {
     e.preventDefault();
+    // validates both inputvalues
     validateUserInput('color');
     validateUserInput('description');
 
+    //checks if there is an input error and if values are not empty
     if (
       !colorError &&
       !descriptionError &&
       formValues.color &&
       formValues.description
     ) {
+      // determine with action to dispatch
       if (props.mode === 'create') {
         console.log(formValues, 'handlesubmitclick');
         handleNewPost();
@@ -103,10 +119,10 @@ const PostForm = (props) => {
         handleUpdatePost();
       }
 
+      // where to go after completion
       if (props.url !== '/') {
-        props.setUrl();
+        navigate('/');
       }
-    } else {
     }
   };
 
