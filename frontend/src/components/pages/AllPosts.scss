@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+.posts-holder {
+  background-color: rgba(253, 252, 252, 0.527);
+  width: 700px;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.welcome {
+  width: 700px;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 2rem;
+  margin: 4rem 0;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(to left, rgb(117, 49, 119), rgb(85, 40, 192));
+  position: relative;
+  &-intro {
+    font-style: italic;
+    margin-bottom: 0;
+  }
+  &-heading {
+    font-family: 'Fredoka One', cursive;
+    font-size: 6rem;
+    margin: 0;
+  }
+  &-text {
+    font-size: 1.5rem;
+  }
+}

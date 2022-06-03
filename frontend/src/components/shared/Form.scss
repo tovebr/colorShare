@@ -25,7 +25,7 @@ form {
     color: red;
     position: absolute;
     top: 9.5rem;
-    left: 6.5rem;
+    left: 4rem;
   }
   button {
     margin-top: 3rem;
@@ -54,7 +54,9 @@ form {
 .postform {
   width: 700px;
   position: relative;
-
+  h3 {
+    text-align: center;
+  }
   .text-inputs {
     display: flex;
     align-items: center;
@@ -68,7 +70,7 @@ form {
 
   .description-error,
   .color-error {
-    bottom: 5rem;
+    top: 8.5rem;
     left: 3.5rem;
   }
   .color-error {
@@ -77,9 +79,34 @@ form {
 
   &-info {
     font-size: 0.8rem;
+    p {
+      margin: 0;
+    }
+    a {
+      text-decoration: underline;
+    }
   }
   &-edit {
     margin: 0;
+  }
+}
+
+.searchbar {
+  background-color: rgba(231, 231, 231, 0.63);
+  width: 700px;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #color,
+  .color-option,
+  label {
+    margin: 0 1rem;
+    padding: 0.5rem;
+    border-radius: 3px;
+    border: none;
   }
 }
 

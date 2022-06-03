@@ -10,10 +10,12 @@ import Backdrop from './Backdrop';
 const ModalOverlay = (props) => {
   const dispatch = useDispatch();
 
+  // if delete-button is clicked the delete-action is dispatched
   const handleDeleteClick = async () => {
     dispatch(deletePost(props.post.id));
   };
 
+  // populating modal with correct content
   const content = (
     <div className='modal flex-centered'>
       {props.mode === 'edit' && <PostForm {...props} />}
@@ -37,6 +39,7 @@ const ModalOverlay = (props) => {
   return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
 };
 
+// combines the two modal-pieces backdrop and modaloverlay to become a full modal
 const Modal = (props) => {
   if (!props.show) return null;
   return (

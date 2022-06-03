@@ -10,13 +10,23 @@ const Login = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
+  /**
+   * Function that will be envoked when component is mounted
+   */
   useEffect(() => {
+    // if a user is logged in (log in was successfull) first page will be shown
     if (auth.id) navigate('/');
   }, [auth, navigate]);
 
+  /**
+   * Function that is envoked when user clicks button to login
+   * @param  {event} e the eventobject
+   */
   const handleSubmit = (e) => {
+    // prevent default reload
     e.preventDefault();
     try {
+      // dispatch action to login user
       dispatch(loginUser(formValues));
     } catch (err) {
       console.log(err.message);

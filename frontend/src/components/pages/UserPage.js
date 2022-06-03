@@ -10,21 +10,31 @@ const UserPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const user = useSelector((state) => state.users.user.user);
+  const posts = useSelector((state) => state.posts.posts);
   const userStatus = useSelector((state) => state.users.user.status);
   const postsStatus = useSelector((state) => state.posts.status);
 
+  /**
+   * This useEffect will run when the component has mounted
+   * it dispatches the actions to redux that will execute the api-request that gets user and posts from the backend
+   */
   useEffect(() => {
     dispatch(getUser(id));
-    if (postsStatus === null) {
-      dispatch(getPosts());
-    }
+    dispatch(getPosts());
   }, []);
 
+  /**
+   * Function that returns users name with first letter caped
+   * @param  {String} string users name from database
+   * @return {String} users name with caps
+   */
   const casedName = (string) => {
     let casedString = '';
 
-    /* If-statment determins wether the name has one word or more */
+    //If-statment determins wether the name has one word or more
     if (string.includes(' ')) {
+      // splits it on blankspace and than splits every word on the first letter,
+      // first letter is caped and then reunited with the other part of the name
       string.split(' ').forEach((word) => {
         casedString += word.slice(0, 1).toUpperCase() + word.slice(1) + ' ';
       });
@@ -57,7 +67,7 @@ const UserPage = () => {
       {userStatus === 'success' && postsStatus === 'loading' && (
         <div className='user-card post'>Loading...</div>
       )}
-      {userStatus === 'failed' && postsStatus === 'failed' && (
+      {(userStatus === 'failed' || postsStatus === 'failed') && (
         <div className='user-card post'>Could not find user</div>
       )}
     </div>

@@ -12,9 +12,11 @@ const Nav = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  // if log out-button is clocked, log put-action is dispatched
   const logOutHandler = () => {
     dispatch(logoutUser());
   };
+
   return (
     <nav className='navbar'>
       <div className='navbar-items page-container'>

@@ -6,9 +6,13 @@ const User = require('../models/user');
 
 //getting all
 router.get('/', async (req, res) => {
+  const page = req.query.p || 0;
+  const postsPerPage = 3;
+
   try {
     const posts = await Post.find();
-    /* res.json(posts); */
+    /* .skip(page * postsPerPage)
+      .limit(postsPerPage); */
     res.json({ posts: posts.map((post) => post.toObject({ getters: true })) });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -61,7 +65,6 @@ router.patch('/:id', getPost, async (req, res) => {
 
   try {
     const updatedPost = await res.post.save();
-    /* {post: updatedPost.toObject({ getters: true })} */
 
     res.json(updatedPost.toObject({ getters: true }));
   } catch (err) {
@@ -82,6 +85,16 @@ router.delete('/:id', async (req, res) => {
     } else {
       res.status(404).json({ message: 'Could not find place' });
     }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+//search
+router.post('/search', async (req, res) => {
+  try {
+    const posts = await Post.find({ $text: { $search: req.query.query } });
+    res.json({ posts: posts.map((post) => post.toObject({ getters: true })) });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

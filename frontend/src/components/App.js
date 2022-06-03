@@ -13,6 +13,7 @@ import Register from './pages/Register';
 function App() {
   const dispatch = useDispatch();
 
+  // loads user (if there is a jwt saved in localstorage)
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
@@ -22,6 +23,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path='/' element={<AllPosts />} />
+        <Route path='/posts/search' element={<AllPosts />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='/auth/register' element={<Register />} />
         <Route path='/auth/login' element={<Login />} />

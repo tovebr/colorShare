@@ -24,6 +24,7 @@ textarea {
 button {
   background-color: rgb(129, 2, 155);
   max-width: 20rem;
+
   color: #fff;
   font-size: 1.2rem;
   cursor: pointer;
@@ -57,4 +58,5 @@ code {
   font-size: 0.8rem;
   color: red;
   position: absolute;
+  max-height: 1rem;
 }

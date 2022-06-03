@@ -7,6 +7,22 @@ export const getPosts = createAsyncThunk('posts/getPosts', async () => {
   const { data } = await axios.get(`${url}/posts`);
   return data.posts;
 });
+
+export const searchPosts = createAsyncThunk(
+  'posts/searchPosts',
+  async (searchTerm, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${url}/posts/search?query=${searchTerm}` /* , {
+        query: searchTerm,
+      } */
+      );
+      return data.posts;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 export const createPost = createAsyncThunk(
   'posts/createPost',
   async (formValues) => {
@@ -42,6 +58,16 @@ const postsSlice = createSlice({
       state.posts = action.payload;
     },
     [getPosts.rejected]: (state, action) => {
+      state.status = 'failed';
+    },
+    [searchPosts.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [searchPosts.fulfilled]: (state, action) => {
+      state.status = 'success';
+      state.posts = action.payload;
+    },
+    [searchPosts.rejected]: (state, action) => {
       state.status = 'failed';
     },
     [createPost.pending]: (state, action) => {

@@ -1,6 +1,12 @@
 .user-card {
   text-align: center;
   margin: 4rem 0;
+  color: #fff;
+  background: linear-gradient(to left, rgb(117, 49, 119), rgb(85, 40, 192));
+  h3 {
+    font-size: 2rem;
+    font-weight: 500;
+  }
 }
 
 @media screen and (max-width: 530px) {

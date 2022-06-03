@@ -11,9 +11,25 @@ const userRoutes = require('./routes/users');
 const postRoutes = require('./routes/posts');
 const authRoutes = require('./routes/auth');
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
+mongoose.connect(
+  process.env.DATABASE_URL,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+  /* function (connectErr, client) {
+    assert.equal(null, connectErr);
+    const coll = client.db('colors').collection('posts');
+    coll.find(filter, (cmdErr, result) => {
+      assert.equal(null, cmdErr);
+      console.log(result);
+    });
+    client.close();
+  } */
+);
 /* mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }); */
 /* mongoose.connect('mongodb://localhost/subscribers'); */
+
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database'));
