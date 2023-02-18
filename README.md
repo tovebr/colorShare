@@ -17,4 +17,8 @@ You need MongoDB local.
 2. Go to the database called  ”colors”, in collection ”users”, press add data and import users.json (attached). Do the same for posts.
 3. This needs to be done for search-function to work: Go to posts-collection, click on ’indexes’. Click create index. Name: descriptionSearch (optional), Select or type a field name: description, select a type: text. Press ’create index’
 
-When all this is done, run backend (npm run devStart), run frontend (npm start/yarn start) and just... enjoy! rejoice!
+When all this is done, run backend (npm start), run frontend (npm start/yarn start) and just... enjoy! rejoice!
+
+
+
+https://user-images.githubusercontent.com/70133569/219844874-bcfbd1fa-6d20-42ba-98e2-11099feb2555.mp4
